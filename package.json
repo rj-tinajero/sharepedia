@@ -1,0 +1,11 @@
+{
+  "name": "sharepedia",
+  "version": "1.0.0",
+  "description": "A Wikipedia-like app for users to share information with one another and even develop collaborative projects.",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "author": "Richard Tinajero",
+  "license": "ISC"
+}
