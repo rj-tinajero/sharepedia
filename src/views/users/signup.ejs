@@ -6,11 +6,15 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
     <main class="container">
+      <hr>
+      <hr>
+      <hr>
+        <% include ../static/partials/messages.ejs %>
 
       <h2>Welcome to Sharepedia</h2>
       <div class="row">
         <div class="col-md-8">
-          <form method="POST" action="/users/signup">
+          <form method="POST" action="/users/create">
             <div class="form-group">
               <label>Name:</label>
               <input type="text" name="name" placeholder="Enter Name" class="form-control"/>
