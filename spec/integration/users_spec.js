@@ -31,7 +31,7 @@ describe("routes : users", () => {
 
   });
 
-  describe("POST /users/create", () => {
+  describe("POST /users", () => {
         it("should create a new user with valid values and redirect", (done) => {
     
           const options = {
@@ -46,9 +46,9 @@ describe("routes : users", () => {
             (err, res, body) => {
               User.findOne({where: {email: "user@example.com"}})
               .then((user) => {
-                expect(user).not.toBeNull();
-                expect(user.email).toBe("user@example.com");
-                expect(user.id).toBe(1);
+                expect(req.user).not.toBeNull();
+                expect(req.user.email).toBe("user@example.com");
+                expect(req.user.id).toBe(1);
                 done();
               })
               .catch((err) => {

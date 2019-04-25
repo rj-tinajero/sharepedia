@@ -17,8 +17,6 @@ module.exports = {
         where: { email }
       })
       .then((user) => {
-
-
         if (!user || !authHelper.comparePass(password, user.password)) {
           return done(null, false, { message: "Invalid email or password" });
         }
@@ -28,6 +26,7 @@ module.exports = {
     }));
 
     passport.serializeUser((user, callback) => {
+        
       callback(null, user.id);
     });
     passport.deserializeUser((id, callback) => {
