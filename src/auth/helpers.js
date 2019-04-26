@@ -11,7 +11,6 @@ module.exports = {
   },
 
   comparePass(userPassword, databasePassword) {
-      console.log(bcrypt.compareSync(userPassword, databasePassword));
     return bcrypt.compareSync(userPassword, databasePassword);
   }
 }
