@@ -7,26 +7,30 @@ const session = require("express-session");
 const flash = require("express-flash");
 const passportConfig = require("./route-config");
 const logger = require('morgan');
+const passport = require('passport');
 
 module.exports = {
   init(app, express){
       app.set("views", viewsFolder);
       app.set("view engine", "ejs");
-      app.use(bodyParser.urlencoded({extended: true}));
-      app.use(logger('dev'));
       app.use(express.static(path.join(__dirname, "..", "assets")));
+      app.use(bodyParser.urlencoded({extended: true}));
         app.use(expressValidator());
+      
+
         app.use(session({
-            secret: process.env.cookieSecret,
+            secret: "process.env.cookieSecret",
             resave: false,
-            saveUninitialized: false,
-            cookie: { maxAge: 1.21e+9 }
+            saveUninitialized: false
         }));
+        app.use(passport.initialize());
+app.use(passport.session());
         app.use(flash());
         passportConfig.init(app);
         app.use((req, res, next) => {
             res.locals.currentUser = req.user;
             next();
         });
+        app.use(logger('dev'));
   }
 };
