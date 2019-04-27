@@ -16,8 +16,6 @@ module.exports = {
       app.use(express.static(path.join(__dirname, "..", "assets")));
       app.use(bodyParser.urlencoded({extended: true}));
         app.use(expressValidator());
-      
-
         app.use(session({
             secret: "process.env.cookieSecret",
             resave: false,
