@@ -1,6 +1,11 @@
 const userQueries = require("../db/queries.users");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
+const keyPublishable = process.env.STRIPE_PUBLISH_KEY;
+console.log("keyPublishable", keyPublishable);
+const keySecret = process.env.STRIPE_SECRET_KEY;
+console.log("keySecret", keySecret);
+const stripe = require("stripe")(keySecret);
 
 module.exports = {
     signup(req, res, next) {
@@ -62,5 +67,44 @@ module.exports = {
         req.logout();
         req.flash("notice", "You've successfully signed out!");
         res.redirect("/");
-      }
+      },
+    chargeForm(req, res, next) {
+      res.render("users/charge", {keyPublishable})
+    },  
+    charge(req, res, next) {
+      stripe.tokens.create({
+        card: {
+          number: '4242424242424242',
+          exp_month: 12,
+          exp_year: 2020,
+          cvc: '123'
+        }
+      }, function(err, token) {
+        if(err){
+          console.log(err);
+        } else {
+        // asynchronously called
+      stripe.customers.create({
+        email: req.body.stripeEmail,
+        card: req.body.stripeToken
+      })
+      .then(customer => 
+        stripe.charges.create({
+          amount: 1500,
+          description: "Premium Plan",
+          currency: "usd",
+          customer: customer.id,
+          card: token
+        }))
+      .then(charge => res.send(charge))
+      .catch(err => {
+        console.log("Error:", err);
+        res.status(500).send({error: "Purchase Failed"});
+      });
+    }
+    });
+        
+  }
+
+  
 }

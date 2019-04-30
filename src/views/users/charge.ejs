@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../static/partials/head.ejs %>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+        <main>
+            <hr>
+            <hr>
+            <hr>
+            <h2>Upgrade to Premium Plan</h2>
+            <div id="shop">
+                    <form method="post" action="/users/charge">
+                        <div class="form-group">
+                                <label>Credit Card Info</label>
+                                <input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
+                              </div>
+                              <div class="form-group">
+                                <input type="tel" class="form-control cc-cvc card-cvc" data-stripe="cvc" autocomplete="off" placeholder="CVC" required>
+                              </div>
+                              <div class="form-group">
+                                <label>Card Expiration Date</label>
+                                <input type="text" data-stripe="exp" placeholder="MM/YY" class="cc-exp form-control" required>
+                      </div>
+                        <input type="submit" 
+                             value="Checkout" 
+                             class="stripe-button" 
+                             data-key="<%= keyPublishable %>"
+                             data-locale="auto"
+                             data-description="Sample Charge"
+                            data-amount="1500"/>
+                     </form>
+            </div>
+        </main>
+
+
+
+
+        <% include ../static/partials/baseScripts.ejs %>
+    </body>
+    <!-- <script>
+        var checkoutHandler = StripeCheckout.configure({
+            key: <%= keyPublishable %>,
+            locale: "auto"
+        });
+        var button = document.getElementById("buttonCheckout");
+        button.addEventListener("click", function(ev) {
+            alert("hey");
+        checkoutHandler.open({
+            name: "Upgrade to Premium Plan",
+            description: "Premium Plan",
+            token: handleToken
+            });
+        });
+
+        function handleToken(token) {
+            fetch("/charge", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(token)
+            })
+            .then(response => {
+                if (!response.ok)
+                    throw response;
+                return response.json();
+            })
+            .then(output => {
+                console.log("Purchase succeeded:", output);
+            })
+            .catch(err => {
+                console.log("Purchase failed:", err);
+            })
+        }
+    </script> -->
+</html>

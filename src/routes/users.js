@@ -10,5 +10,7 @@ router.post("/users", validation.validateUser, userController.create);
 router.get("/users/signin", userController.signinForm);
 router.post("/users/signin", validation.validateUser, userController.signin);
 router.get("/users/signout", userController.signOut);
+router.get("/users/charge", userController.chargeForm);
+router.post("/users/charge", userController.charge);
 
 module.exports = router;

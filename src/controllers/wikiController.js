@@ -30,7 +30,7 @@ module.exports = {
     },
     show(req, res, next) {
         wikiQueries.getWiki(req.params.id, (err, wiki) => {
-            if(err || wiki == null) { console.log(err);
+            if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
                 res.render("wikis/show", {wiki});
