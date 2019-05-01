@@ -80,26 +80,27 @@ module.exports = {
           exp_year: 2020,
           cvc: '123'
         }
-      }, function(token) {
+      }, function(err, token) {
       stripe.customers.create({
         email: req.user.email
       })
-      .then(customer => 
+      .then(customer => {console.log(token); console.log(customer);
         stripe.charges.create({
           amount: 1500,
           description: "Premium Plan",
           currency: "usd",
           customer: customer.id,
           card: token
-        }))
+        })})
       .then(charge => res.send(charge))
       .catch(err => {
         console.log("Error:", err);
         res.status(500).send({error: "Purchase Failed"});
       });
-    
+      req.flash("notice", "You've successfully upgraded your plan!");
+      res.redirect("/");
     });
-        
+
   }
 
   
