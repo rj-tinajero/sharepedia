@@ -72,6 +72,7 @@ module.exports = {
       res.render("users/charge", {keyPublishable})
     },  
     charge(req, res, next) {
+      console.log(req.body);
       stripe.tokens.create({
         card: {
           number: '4242424242424242',
@@ -79,14 +80,9 @@ module.exports = {
           exp_year: 2020,
           cvc: '123'
         }
-      }, function(err, token) {
-        if(err){
-          console.log(err);
-        } else {
-        // asynchronously called
+      }, function(token) {
       stripe.customers.create({
-        email: req.body.stripeEmail,
-        card: req.body.stripeToken
+        email: req.user.email
       })
       .then(customer => 
         stripe.charges.create({
@@ -101,7 +97,7 @@ module.exports = {
         console.log("Error:", err);
         res.status(500).send({error: "Purchase Failed"});
       });
-    }
+    
     });
         
   }
