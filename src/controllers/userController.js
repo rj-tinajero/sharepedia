@@ -5,7 +5,7 @@ const keyPublishable = process.env.STRIPE_PUBLISH_KEY;
 console.log("keyPublishable", keyPublishable);
 const keySecret = process.env.STRIPE_SECRET_KEY;
 console.log("keySecret", keySecret);
-const stripe = require("stripe")(keySecret);
+const stripe = require("stripe")('sk_test_h2rI1fERunxVIz32Gn6r7KIr00M5ITVe9M');
 
 module.exports = {
     signup(req, res, next) {
@@ -73,14 +73,7 @@ module.exports = {
     },  
     charge(req, res, next) {
       console.log(req.body);
-      stripe.tokens.create({
-        card: {
-          number: '4242424242424242',
-          exp_month: 12,
-          exp_year: 2020,
-          cvc: '123'
-        }
-      }, function(err, token) {
+      const token = req.body.stripeToken;
       stripe.customers.create({
         email: req.user.email
       })
@@ -91,15 +84,18 @@ module.exports = {
           currency: "usd",
           customer: customer.id,
           card: token
+        }, (err, charge) => {
+          if(err) {
+            console.log("Error:", err);
+            res.status(500).send({error: "Purchase Failed"});
+          } else if(charge) {
+            res.send(charge)
+            req.flash("notice", "You've successfully upgraded your plan!");
+            res.redirect("/");
+          }
         })})
-      .then(charge => res.send(charge))
-      .catch(err => {
-        console.log("Error:", err);
-        res.status(500).send({error: "Purchase Failed"});
-      });
-      req.flash("notice", "You've successfully upgraded your plan!");
-      res.redirect("/");
-    });
+      
+  
 
   }
 

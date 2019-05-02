@@ -12,7 +12,19 @@
             <hr>
             <h2>Upgrade to Premium Plan</h2>
             <div id="shop">
-                    <form method="post" action="/users/charge">
+                    <form action='/users/charge' method="POST">
+                        <script
+                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="<%= keyPublishable %>"
+                          data-amount="1500"
+                          data-name="Sharepedia"
+                          data-description="premium account"
+                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                          data-locale="auto"
+                          data-zip-code="true">
+                        </script>
+                </form>
+                    <!-- <form method="post" action="/users/charge">
                         <div class="form-group">
                                 <label>Credit Card Info</label>
                                 <input type="tel" class="form-control card-number cc-number" data-stripe="number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required>
@@ -31,7 +43,7 @@
                              data-locale="auto"
                              data-description="Sample Charge"
                             data-amount="1500"/>
-                     </form>
+                     </form> -->
             </div>
         </main>
 
