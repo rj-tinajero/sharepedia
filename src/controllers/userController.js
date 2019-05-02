@@ -72,31 +72,40 @@ module.exports = {
       res.render("users/charge", {keyPublishable})
     },  
     charge(req, res, next) {
-      console.log(req.body);
       const token = req.body.stripeToken;
       stripe.customers.create({
-        email: req.user.email
+        email: req.user.email,
+        source: token
       })
-      .then(customer => {console.log(token); console.log(customer);
+      .then(customer => {
         stripe.charges.create({
           amount: 1500,
           description: "Premium Plan",
           currency: "usd",
           customer: customer.id,
-          card: token
+          card: token.id
         }, (err, charge) => {
-          if(err) {
-            console.log("Error:", err);
-            res.status(500).send({error: "Purchase Failed"});
-          } else if(charge) {
-            res.send(charge)
+          if(charge) {
             req.flash("notice", "You've successfully upgraded your plan!");
+            req.user.role += 1;
+            req.user.save();
             res.redirect("/");
-          }
+          } 
         })})
+        .catch((err) => {
+          console.log("Error:", err);
+          res.status(500).send({error: "Purchase Failed"});
+        })
+        
       
-  
-
+  },
+  downGrade(req, res, next) {
+    if(req.user.role === 1) {
+      req.user.role -= 1;
+      req.user.save();
+      res.redirect("/");
+    }
+    res.redirect("/");
   }
 
   

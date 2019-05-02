@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "wikis"
     });
   };
+
+  User.prototype.isPrem = function() {
+    return this.role === 1;
+  }
   
   return User;
 };
