@@ -5,7 +5,9 @@
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
-
+    <hr>
+    <hr>
+    <hr>
     <main class="container">
 
       <h1>New Wiki</h1>
@@ -19,9 +21,15 @@
           <label for="body">Body</label>
           <textarea rows="10" class="form-control" name="body" placeholder="Enter Body"></textarea>
         </div>
+        <% if(locals.currentUser.isPrem()) { %>
+          <div>
+            <label for="private">Make Wiki Private</label>
+           <input type="checkbox" name="private">
+          </div>
+        <% } %> 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-
+      
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
