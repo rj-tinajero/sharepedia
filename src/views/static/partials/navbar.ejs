@@ -31,9 +31,8 @@
                   <div>
                   <a id="alert" class="nav-link" href="/users/downGrade">Downgrade Plan</a>
                   <script>
-                      window.confirm("You sure? All your private stuff will become public!");
                       const form = document.getElementById("alert");
-                      form.addEventListener("submit", e => {
+                      form.addEventListener("click", e => {
                         e.preventDefault();
                         if(window.confirm("You sure? All your private stuff will become public!")) {
                           form.submit();
