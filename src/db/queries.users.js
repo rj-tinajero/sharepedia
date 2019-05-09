@@ -15,5 +15,19 @@ module.exports = {
         .catch((err) => {
             callback(err);
         })
+    },
+    makeWikisPub(id, callback) {
+        User.scope({method: ["makePublic", id]}).all()
+        .then((wikis) => {
+            for(let i = 0; i < wikis.length; i++) {
+                wikis[i].update({
+                    private: false
+                })
+            }
+        })
+        .catch((err) => {
+            callback(err);
+        })
+
     }
 }

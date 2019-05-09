@@ -100,13 +100,19 @@ module.exports = {
       
   },
   downGrade(req, res, next) {
-    console.log(req.wiki);
     if(req.user.role === 1) {
       req.user.role -= 1;
       req.user.save();
-      res.redirect("/");
     }
-    res.redirect("/");
+    userQueries.makeWikisPub(req.params.id, (err) => {
+      if(err) {
+        console.log(err);
+      res.redirect("/");
+      } else {
+        res.redirect("/");
+      }
+    })
+    
   }
 
   

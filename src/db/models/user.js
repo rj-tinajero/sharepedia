@@ -24,11 +24,25 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "wikis"
     });
+    User.addScope("makePublic", (userId) => {
+      return {
+        include: [{
+          model: models.Wiki
+        }],
+        where: {
+          userId: userId,
+          private: true
+        },
+        limit: null,
+        order: [["createdAt", "DESC"]]
+      }
+    });
   };
 
   User.prototype.isPrem = function() {
     return this.role === 1;
-  }
+  };
+  
   
   return User;
 };

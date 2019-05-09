@@ -22,8 +22,18 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Wiki.belongsTo(models.User, {
       foreignKey: "userId",
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
     });
   };
+
+  // Wiki.addScope("makePublic", (userId) => {
+  //   return{
+  //     include: [{
+  //       model: models.User
+  //     }],
+  //     where: {userId: userId},
+  //     limit: null
+  //   }
+  // })
   return Wiki;
 };
