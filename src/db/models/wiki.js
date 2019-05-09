@@ -26,14 +26,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  // Wiki.addScope("makePublic", (userId) => {
-  //   return{
-  //     include: [{
-  //       model: models.User
-  //     }],
-  //     where: {userId: userId},
-  //     limit: null
-  //   }
-  // })
   return Wiki;
 };

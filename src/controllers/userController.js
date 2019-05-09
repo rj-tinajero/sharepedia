@@ -104,7 +104,7 @@ module.exports = {
       req.user.role -= 1;
       req.user.save();
     }
-    userQueries.makeWikisPub(req.params.id, (err) => {
+    userQueries.makeWikisPub(req.user.id, (err) => {
       if(err) {
         console.log(err);
       res.redirect("/");
@@ -112,6 +112,7 @@ module.exports = {
         res.redirect("/");
       }
     })
+    res.redirect("/");
     
   }
 

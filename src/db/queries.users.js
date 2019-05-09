@@ -1,4 +1,5 @@
 const User = require("./models").User;
+const Wiki = require("./models").Wiki;
 const bcrypt = require("bcryptjs");
 
 module.exports = {
@@ -17,7 +18,11 @@ module.exports = {
         })
     },
     makeWikisPub(id, callback) {
-        User.scope({method: ["makePublic", id]}).all()
+        Wiki.findAll({
+            where: {
+                userId: id
+            }
+        })
         .then((wikis) => {
             for(let i = 0; i < wikis.length; i++) {
                 wikis[i].update({
