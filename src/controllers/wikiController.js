@@ -1,4 +1,5 @@
 const wikiQueries = require("../db/queries.wikis");
+const markdown = require( "markdown" ).markdown;
 
 module.exports = {
     index(req, res, next) {
