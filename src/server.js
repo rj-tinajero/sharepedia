@@ -20,5 +20,5 @@ function normalizePort(val) {
 }
 
 server.on("listening", () => {
-    console.log(`server is listening for requests on port ${server.address().port}, ${app.settings.env}`);
+    console.log(`server is listening for requests on port ${server.address().port}`);
 });
