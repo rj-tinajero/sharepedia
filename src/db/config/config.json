@@ -20,11 +20,11 @@
   "production": {
     "username": "root",
     "password": null,
-    "database": "process.env.postgres://yolvvwduixjajw:83084a31533f81606d587626ffe2d3dff4f7cfdd39b4f5a4bab955fcb883634e@ec2-50-17-246-114.compute-1.amazonaws.com:5432/da0ft7qp67laas",
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false,
     "operatorsAliases": false,
-    "use_env_variable": "postgres://yolvvwduixjajw:83084a31533f81606d587626ffe2d3dff4f7cfdd39b4f5a4bab955fcb883634e@ec2-50-17-246-114.compute-1.amazonaws.com:5432/da0ft7qp67laas"
+    "use_env_variable": "DATABASE_URL"
   }
 }
