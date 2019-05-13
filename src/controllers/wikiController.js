@@ -35,7 +35,7 @@ module.exports = {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/show", {wiki, markdown});
+                res.render("wikis/show", markdown.toHTML({wiki}));
             }
         });
     },
@@ -53,7 +53,7 @@ module.exports = {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/edit", {wiki, markdown});
+                res.render("wikis/edit", {wiki});
             }
         });
     },
