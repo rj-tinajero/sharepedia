@@ -1,5 +1,6 @@
 const wikiQueries = require("../db/queries.wikis");
 const markdown = require( "markdown" ).markdown;
+console.log(markdown.toHTML("Hello *World*!"));
 
 module.exports = {
     index(req, res, next) {
@@ -34,7 +35,7 @@ module.exports = {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/show", {wiki});
+                res.render("wikis/show", {wiki, markdown});
             }
         });
     },
@@ -52,7 +53,7 @@ module.exports = {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/edit", {wiki});
+                res.render("wikis/edit", {wiki, markdown});
             }
         });
     },
