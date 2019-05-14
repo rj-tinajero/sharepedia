@@ -1,6 +1,5 @@
 const wikiQueries = require("../db/queries.wikis");
 const markdown = require( "markdown" ).markdown;
-console.log(markdown.toHTML("Hello *World*!"));
 
 module.exports = {
     index(req, res, next) {

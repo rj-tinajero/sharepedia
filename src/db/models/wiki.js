@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       onDelete: "CASCADE",
     });
+    Wiki.belongsToMany(models.User, {
+      as: "Collaborators",
+      through: "Collaborators",
+      foreignKey: "wikiId"
+    });
   };
 
   return Wiki;

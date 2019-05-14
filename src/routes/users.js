@@ -4,7 +4,6 @@ const router = express.Router();
 
 
 const userController = require("../controllers/userController");
-const wikiController = require("../controllers/wikiController");
 
 router.get("/users/signup", userController.signup);
 router.post("/users", validation.validateUser, userController.create);
