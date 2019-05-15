@@ -28,8 +28,14 @@
         </div>
         <div id="preview"> </div>
         <script src="lib/markdown.js"></script>
+
+        <!-- <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
+          <div>
+              
+          </div>
+        <% } %>   -->
         
-        <% if(locals.currentUser.isPrem()) { %>
+        <% if(locals.currentUser.isPrem() && wiki.private === null) { %>
           <div>
               <label for="private">Make Wiki Private</label>
               <input type="checkbox" name="private">

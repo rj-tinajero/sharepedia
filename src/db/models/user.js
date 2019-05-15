@@ -24,11 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "wikis"
     });
-    User.belongsToMany(models.Wiki, {
-      as: "Private_Wikis",
-      through: "Collaborators",
-      foreignKey: "userId"
-    });
+   
   };
 
   User.prototype.isPrem = function() {
