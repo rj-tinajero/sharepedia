@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "wikis"
     });
+    // User.belongsTo(models.Collaborator, {
+    //   as: "Collaborator",
+    //   foreignKey: "userId"
+    // });
    
   };
 

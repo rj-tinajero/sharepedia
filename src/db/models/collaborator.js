@@ -12,6 +12,13 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Collaborator.associate = function(models) {
     // associations can be defined here
+    Collaborator.belongsTo(models.Wiki, {
+      foreignKey: "wikiId"
+    });
+    Collaborator.belongsTo(models.User, {
+      foreignKey: "userId"
+    })
+
   };
   return Collaborator;
 };
