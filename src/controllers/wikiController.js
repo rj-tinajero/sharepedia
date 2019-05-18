@@ -1,4 +1,5 @@
 const wikiQueries = require("../db/queries.wikis");
+const userQueries = require("../db/queries.users");
 const markdown = require( "markdown" ).markdown;
 
 module.exports = {
@@ -35,7 +36,8 @@ module.exports = {
                 console.log(err);
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/show", markdown.ToHTML({wiki}));
+                console.log(wiki);
+                res.render("wikis/show", {wiki, markdown});
             }
         });
     },
