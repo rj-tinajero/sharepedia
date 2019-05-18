@@ -18,7 +18,7 @@ module.exports = {
         })
         .catch((err) => {
             console.log(err.toString());
-            callback(err);
+            callback(err); 
         })
     },
     getWiki(id, callback) {

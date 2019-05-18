@@ -30,11 +30,12 @@ module.exports = {
         });
     },
     show(req, res, next) {
-        wikiQueries.getWiki(req.params.id, (err, wiki) => {
+        wikiQueries.getWiki(req.params.id, (err, wiki) => { console.log(err);
             if(err || wiki == null) {
+                console.log(err);
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/show", markdown.toHTML({wiki}));
+                res.render("wikis/show", markdown.ToHTML({wiki}));
             }
         });
     },

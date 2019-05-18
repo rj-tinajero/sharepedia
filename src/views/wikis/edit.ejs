@@ -29,12 +29,13 @@
         <div id="preview"> </div>
         <script src="lib/markdown.js"></script>
 
-        <!-- <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
-          <div>
-              
-          </div>
-        <% } %>   -->
-        
+        <!-- <section>
+          <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
+            <%  users.forEach((user) => { %>
+              <%- include("../users/show.ejs", {user}) %>
+            <% }) %>
+          <% } %>  
+        </section> -->
         <% if(locals.currentUser.isPrem() && wiki.private === null) { %>
           <div>
               <label for="private">Make Wiki Private</label>
@@ -43,6 +44,11 @@
         <% } %>  
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
+      
+      <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
+        <% include ../users/index.ejs %>
+      <% } %>  
+
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

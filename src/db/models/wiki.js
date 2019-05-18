@@ -24,10 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       onDelete: "CASCADE",
     });
+  
     // Wiki.hasMany(models.User, {
     //   as: "Collaborators",
     //   foreignKey: "wikiId"
     // })
+  };
+
+  Wiki.prototype.getCollaboratorsFor = function(userId) {
+    return this.collaborators.find((collaborator) => { return collaborator.userId == userId });
   };
 
   return Wiki;

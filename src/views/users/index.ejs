@@ -1,0 +1,27 @@
+<% if(users) { %>
+   <% users.forEach((user) => { %>
+   <div style="width: 50%">
+     <hr>
+     <h5>
+       Add collaborators to your private wiki!
+     </h5>
+     <small class="card-subtitle mb-2 text-muted">
+       <%= user.email %>
+     </small>
+     
+     <% const collab = wiki.getCollaboratorsFor(locals.currentUser.id) %>
+     <% if (collab) { %>
+       <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
+         <button type="submit" class="btn btn-danger">Remove Collaborator</button>
+       </form>
+     <% } else { %>
+    
+       <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
+         <button type="submit" class="btn btn-primary">Add Collaborator</button>
+       </form>
+     <% } %>
+     
+     <hr>
+   </div>
+      <% }) %>
+ <% } %>

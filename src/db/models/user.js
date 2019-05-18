@@ -34,7 +34,9 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.isPrem = function() {
     return this.role === 1;
   };
-  
+  // User.prototype.isCollab = function() {
+  //   return 
+  // }
   
   return User;
 };
