@@ -20,16 +20,25 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+    // User.hasMany(models.Wiki, {
+    //   foreignKey: "id",
+    //   as: "wikis"
+    // });
+    // User.belongsTo(models.Collaborator, {
+    //   as: "collaborators",
+    //   through: "Collaborator",
+    //   foreignKey: "id"
+    // });
+
+    User.hasMany(models.Collaborator, {
+      foreignKey: "userId",
+      onDelete: "CASCADE"
+    });
     User.hasMany(models.Wiki, {
-      foreignKey: "id",
-      as: "wikis"
+      foreignKey: "userId",
+      onDelete: "CASCADE"
     });
-    User.belongsTo(models.Collaborator, {
-      as: "collaborators",
-      through: "Collaborator",
-      foreignKey: "id"
-    });
-   
+
   };
 
   User.prototype.isPrem = function() {
