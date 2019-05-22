@@ -30,15 +30,16 @@ module.exports = (sequelize, DataTypes) => {
     //   foreignKey: "id"
     // });
 
-    User.hasMany(models.Collaborator, {
-      foreignKey: "userId",
-      onDelete: "CASCADE"
-    });
+    
     User.hasMany(models.Wiki, {
-      foreignKey: "userId",
-      onDelete: "CASCADE"
+      foreignKey: "id",
+      as: "wikis"
     });
-
+    User.belongsTo(models.Collaborator, {
+      as: "collaborators",
+      through: "Collaborator",
+      foreignKey: "id"
+    });
   };
 
   User.prototype.isPrem = function() {

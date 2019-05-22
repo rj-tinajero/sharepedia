@@ -25,15 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE",
     });
   
-    // Wiki.belongsToMany(models.User, {
-    //   as: "collaborators",
-    //   through: 'Collaborator',
-    //   foreignKey: "wikiId"
-    // });
-    Wiki.hasMany(models.Collaborator, {
+    Wiki.belongsToMany(models.User, {
       as: "collaborators",
-      foreignKey: "wikiId",
-      onDelete: "CASCADE"
+      through: "Collaborator",
+      foreignKey: "wikiId"
     })
   };
 
