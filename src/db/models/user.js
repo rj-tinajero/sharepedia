@@ -24,16 +24,14 @@ module.exports = (sequelize, DataTypes) => {
     //   foreignKey: "id",
     //   as: "wikis"
     // });
-    // User.belongsTo(models.Collaborator, {
-    //   as: "collaborators",
-    //   through: "Collaborator",
-    //   foreignKey: "id"
-    // });
+    User.hasMany(models.Collaborator, {
+      foreignKey: "userId",
+      as: "collaborators"
+    });
 
-    
     User.hasMany(models.Wiki, {
-      foreignKey: "id",
-      as: "wikis"
+      foreignKey: "userId",
+      as: "user"
     });
     
   };

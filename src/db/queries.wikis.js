@@ -27,7 +27,7 @@ module.exports = {
             include: [
                 {
                     model: User,
-                    as: "collaborators"
+                    as: "user"
                 }
             ]
         })

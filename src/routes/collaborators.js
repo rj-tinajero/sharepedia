@@ -3,7 +3,7 @@ const router = express.Router();
 const collaboratorController = require("../controllers/collaboratorController");
 
 router.post("/wikis/:wikiId/collaborators/create", 
-   collaboratorController.create);
+   collaboratorController.collaborators);
 router.post("/wikis/:wikiId/collaborators/:id/destroy", 
    collaboratorController.destroy);
 

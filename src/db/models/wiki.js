@@ -23,13 +23,14 @@ module.exports = (sequelize, DataTypes) => {
     Wiki.belongsTo(models.User, {
       foreignKey: "userId",
       onDelete: "CASCADE",
+      as: "user"
     });
   
-    Wiki.belongsToMany(models.User, {
-      as: "collaborators",
-      through: "Collaborator",
-      foreignKey: "wikiId"
-    })
+    // Wiki.hasMany(models.Collaborator, {
+    //   as: "collaborators",
+    //   through: "Collaborator",
+    //   foreignKey: "wikiId"
+    // })
   };
 
   Wiki.prototype.getCollaboratorsFor = function(userId) {

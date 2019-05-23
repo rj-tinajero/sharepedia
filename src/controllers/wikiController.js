@@ -37,7 +37,6 @@ module.exports = {
                 console.log(err);
                 res.redirect(404, "/");
             } else {
-                console.log(wiki);
                 res.render("wikis/show", {wiki, markdown});
             }
         });

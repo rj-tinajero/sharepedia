@@ -116,9 +116,9 @@ module.exports = {
   },
   index(req, res, next) {
     userQueries.getAllUsers((err, users) => {
-      if(err) {
+      if(err) { console.log(users);
           res.redirect(404, "/");
-      } else {
+      } else { 
           res.render("users/index", {users});
       }
     });

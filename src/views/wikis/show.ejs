@@ -9,12 +9,14 @@
     <main class="container">
         <hr>
         <hr>
-        <hr>
+         <hr>
       <h1><%= wiki.title %></h1>
 
       <p><%- markdown.toHTML(wiki.body) %></p>
         <hr>
-      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        <form style="display:initial" action="/users" method="get">
+          <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+        </form>
       <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>
