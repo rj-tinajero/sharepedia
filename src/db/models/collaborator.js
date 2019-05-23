@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "wikiId"
     });
     Collaborator.belongsTo(models.User, {
-      foreignKey: "userId"
+      foreignKey: 'userId'
     });
     
   };

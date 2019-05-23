@@ -35,6 +35,7 @@ module.exports = {
             callback(null, wiki);
         })
         .catch((err) => {
+            console.log(err);
             callback(err);
         })
     },
