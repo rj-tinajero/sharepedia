@@ -51,6 +51,13 @@ module.exports = {
         });
     },
     edit(req, res, next) {
+        userQueries.getAllUsers((err, users) => {
+      if(err) { console.log(users);
+          res.redirect(404, "/");
+      } else { 
+          res.render("users/index", {users});
+      }
+    });
         wikiQueries.getWiki(req.params.id, (err, wiki) => {
             if(err || wiki == null) {
                 res.redirect(404, "/");
@@ -60,6 +67,7 @@ module.exports = {
         });
     },
     update(req, res, next) {
+        
         wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
             if(err || wiki == null) {
                 res.redirect(404, `/wikis/${req.body.id}/edit`);

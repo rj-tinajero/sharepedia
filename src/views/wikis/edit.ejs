@@ -40,7 +40,8 @@
       </form>
       
       <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
-        <% include ../users/index.ejs %>
+        <% consoloe.log(wiki) %>
+        <%- include('../users/index', {wiki: wiki}) %>
       <% } %>  
 
     </main>
