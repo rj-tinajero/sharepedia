@@ -1,4 +1,4 @@
-// const collabQueries = require('../db/queries.collaborators');
+const collabQueries = require('../db/queries.collaborators');
 
 // module.exports = {
 //    create(req, res, next) {
@@ -34,17 +34,27 @@ const User = require('../db/models').User;
 const Collaborator = require('../db/models').Collaborator;
 
 module.exports = {
-   destroy(req, res, next){
-      Collaborator.destroy({where: {id: req.params.collabId}})
-          .then(collaborator => {
-             req.flash("notice", "Collaborator was removed successfully.")
-             res.redirect(`/wikis/${req.params.id}/edit`);
-          })
-          .catch(err => {
-             res.render('wikis/index.ejs', {error: err});
-          });
+   destroy(req, res, next) {
+         collabQueries.deleteCollaborator(req, (err, collaborator) => {
+            if(err) {
+               console.log(err);
+               res.redirect(err, req.headers.referer);
+            } else {
+            res.redirect(req.headers.referer);
+         }
+      });
    },
-   collaborators(req, res, next){
+   // destroy(req, res, next){
+   //    Collaborator.destroy({where: {id: req.params.collabId}})
+   //        .then(collaborator => {
+   //           req.flash("notice", "Collaborator was removed successfully.")
+   //           res.redirect(req.headers.referer);
+   //        })
+   //        .catch(err => {
+   //          res.redirect(`/wikis/${req.params.id}/edit`)
+   //        });
+   
+   create(req, res, next){
       User.findOne({where: {email: req.body.email}})
           .then(user => {
              if (user) {
@@ -60,7 +70,7 @@ module.exports = {
              }
              else {
                 req.flash("notice", "Collaborator email not found.  Please try again.")
-                res.redirect(`/wikis/${req.params.id}/edit`);
+                res.redirect(req.headers.referer);
              }
           })
           .catch(err => {

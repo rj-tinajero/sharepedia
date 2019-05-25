@@ -29,6 +29,9 @@
         <div id="preview"> </div>
         <script src="lib/markdown.js"></script>
 
+        <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
+          <%- include('../users/index', {wiki: wiki, test: "test"}) %>
+        <% } %>  
 
         <% if(locals.currentUser.isPrem() && wiki.private === null) { %>
           <div>
@@ -39,10 +42,7 @@
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
       
-      <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
-        <% consoloe.log(wiki) %>
-        <%- include('../users/index', {wiki: wiki}) %>
-      <% } %>  
+      
 
     </main>
 

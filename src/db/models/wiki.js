@@ -26,11 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       as: "user"
     });
   
-    // Wiki.hasMany(models.Collaborator, {
-    //   as: "collaborators",
-    //   through: "Collaborator",
-    //   foreignKey: "wikiId"
-    // })
+    Wiki.hasMany(models.Collaborator, {
+      as: "collaborators",
+      foreignKey: "wikiId"
+    })
   };
 
   Wiki.prototype.getCollaboratorsFor = function(userId) {

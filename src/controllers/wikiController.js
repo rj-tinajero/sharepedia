@@ -55,16 +55,16 @@ module.exports = {
       if(err) { console.log(users);
           res.redirect(404, "/");
       } else { 
-          res.render("users/index", {users});
-      }
-    });
         wikiQueries.getWiki(req.params.id, (err, wiki) => {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/edit", {wiki});
+                res.render("wikis/edit", {wiki, users});
             }
         });
+      }
+    });
+        
     },
     update(req, res, next) {
         

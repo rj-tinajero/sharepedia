@@ -28,6 +28,10 @@ module.exports = {
                 {
                     model: User,
                     as: "user"
+                },
+                {
+                    model: Collaborator,
+                    as: "collaborators"
                 }
             ]
         })
