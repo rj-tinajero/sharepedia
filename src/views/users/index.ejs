@@ -10,14 +10,17 @@
      </small>
      
      <% const collab = wiki.getCollaboratorsFor(locals.currentUser.id) %>
+
      <% if (collab) { %>
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
-         <button type="submit" class="btn btn-danger" name="destroy">Remove Collaborator</button>
+        
+         <button type="submit" class="btn btn-danger">Remove Collaborator</button>
        </form>
      <% } else { %>
-    
+
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
-         <button type="submit" class="btn btn-primary" name="create">Add Collaborator</button>
+        
+         <button value="" type="submit" class="btn btn-primary">Add Collaborator</button>
        </form>
      <% } %>
      

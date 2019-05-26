@@ -1,5 +1,6 @@
 const collabQueries = require('../db/queries.collaborators');
 
+
 // module.exports = {
 //    create(req, res, next) {
 //       let newCollab = {
@@ -54,9 +55,9 @@ module.exports = {
    //          res.redirect(`/wikis/${req.params.id}/edit`)
    //        });
    
-   create(req, res, next){
+   create(req, res, next){ console.log("GRRRRRR", req.user.email );
       User.findOne({where: {email: req.body.email}})
-          .then(user => {
+          .then(user => { console.log("MMMMMMMMM", user);
              if (user) {
                 let collaborator = Collaborator.build({
                    wikiId: req.params.id,
