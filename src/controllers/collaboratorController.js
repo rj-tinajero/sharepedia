@@ -60,18 +60,18 @@ module.exports = {
       User.findOne({where: {id: req.user.id}})
           .then(user => { 
              if (user) { 
-                Wiki.findOne({where: {id: req.wiki.id}})
+                Wiki.findOne({where: {id: req.params.id}})
                 .then(wiki => {
                   let collaborator = Collaborator.build({
                      userId: req.user.id,
                      wikiId: req.params.id
-                  })
-                });
-               console.log(collaborators, "DOG");
-                collaborator.save();
+                  });
+                  collaborator.save();
 
-                req.flash("notice", "Collaborator has been successfully added!")
-                res.redirect(`/wikis/${req.params.id}`);
+                  req.flash("notice", "Collaborator has been successfully added!")
+                  res.redirect(`/wikis/${req.params.id}`);
+                });
+               
              }
              else {
                 req.flash("notice", "Collaborator email not found.  Please try again.")
