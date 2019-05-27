@@ -2,20 +2,7 @@ const collabQueries = require('../db/queries.collaborators');
 
 
 // module.exports = {
-//    create(req, res, next) {
-//       let newCollab = {
-//          userId: req.user.id,
-//          wikiId: req.wiki.id
-//       };
-//       collabQueries.createCollaborator(newCollab, (err, collaborator) => {
-//          if(err) {
-//             console.log(err);
-//             res.redirect(`/wikis/${req.wiki.id}`);
-//          } else {
-//             res.redirect(`/wikis/${req.wiki.id}`);
-//          }
-//       })
-//    },
+
 //    destroy(req, res, next) {
 //       collabQueries.deleteCollaborator(req, (err, collaborator) => {
 //          if(err) {
@@ -35,6 +22,20 @@ const User = require('../db/models').User;
 const Collaborator = require('../db/models').Collaborator;
 
 module.exports = {
+   //    create(req, res, next) {
+   //    let newCollab = {
+   //       userId: req.user.id,
+   //       wikiId: req.params.id
+   //    };
+   //    collabQueries.createCollaborator(newCollab, (err, collaborator) => {
+   //       if(err) {
+   //          console.log(err);
+   //          res.redirect(`/wikis/${req.params.id}`);
+   //       } else {
+   //          res.redirect(`/wikis/${req.params.id}`);
+   //       }
+   //    })
+   // },
    destroy(req, res, next) {
          collabQueries.deleteCollaborator(req, (err, collaborator) => {
             if(err) {
@@ -55,15 +56,18 @@ module.exports = {
    //          res.redirect(`/wikis/${req.params.id}/edit`)
    //        });
    
-   create(req, res, next){ console.log("GRRRRRR", req.user.email );
-      User.findOne({where: {email: req.body.email}})
-          .then(user => { console.log("MMMMMMMMM", user);
-             if (user) {
-                let collaborator = Collaborator.build({
-                   wikiId: req.params.id,
-                   userId: user.id
+   create(req, res, next){ console.log(req.wiki, "nananananana");
+      User.findOne({where: {id: req.user.id}})
+          .then(user => { 
+             if (user) { 
+                Wiki.findOne({where: {id: req.wiki.id}})
+                .then(wiki => {
+                  let collaborator = Collaborator.build({
+                     userId: req.user.id,
+                     wikiId: req.params.id
+                  })
                 });
-
+               console.log(collaborators, "DOG");
                 collaborator.save();
 
                 req.flash("notice", "Collaborator has been successfully added!")
@@ -74,7 +78,7 @@ module.exports = {
                 res.redirect(req.headers.referer);
              }
           })
-          .catch(err => {
+          .catch(err => { console.log(err);
              req.flash("error", "Error saving wiki.  Please try again.")
              res.redirect(`/wikis/${req.params.id}/edit`);
           });

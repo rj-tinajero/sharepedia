@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     })
   };
 
-  Wiki.prototype.getCollaboratorsFor = function(userId) { console.log(userId);
+  Wiki.prototype.getCollaboratorsFor = function(userId) {
     return this.collaborators.find((collaborator) => { return collaborator.userId == userId });
   };
 

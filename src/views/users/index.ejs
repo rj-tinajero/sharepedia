@@ -1,16 +1,14 @@
+
 <% if(users) { %>
    <% users.forEach((user) => { %>
    <div style="width: 50%">
      <hr>
-     <h5>
-       Add collaborators to your private wiki!
-     </h5>
+     
      <small class="card-subtitle mb-2 text-muted">
        <%= user.email %>
      </small>
      
      <% const collab = wiki.getCollaboratorsFor(locals.currentUser.id) %>
-
      <% if (collab) { %>
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
         
@@ -19,8 +17,9 @@
      <% } else { %>
 
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
-        
-         <button value="" type="submit" class="btn btn-primary">Add Collaborator</button>
+        <input type="hidden" value="<%= user.id %>" name="user">
+        <input type="hidden" value="<%= wiki.id %>" name="wiki">
+         <button type="submit" class="btn btn-primary">Add Collaborator</button>
        </form>
      <% } %>
      
