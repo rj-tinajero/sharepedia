@@ -1,4 +1,3 @@
-
 <% if(users) { %>
    <% users.forEach((user) => { %>
    <div style="width: 50%">
@@ -8,9 +7,9 @@
        <%= user.email %>
      </small>
      
-    
-     <% wiki.collaborators.forEach((collaborator) => { %>
-      < if(indexOf('userId') > -1) { %>
+     <% const collab = wiki.getCollaboratorsFor(user.id) %>
+     <% wiki.collaborators.forEach((collaborator) => {  %>
+      <% if(user.isCollab(user.id)) { %>
         
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
         
@@ -28,6 +27,6 @@
      
      <hr>
    </div>
-      <% }) %>
+     <% }) %>
       <% }) %>
  <% } %>
