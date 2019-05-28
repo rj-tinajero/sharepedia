@@ -9,8 +9,8 @@
      </small>
      
     
-     <% wiki.collaborators.forEach( collaborator => {
-      < if(user.id == collaborator.userId) { %>
+     <% wiki.collaborators.forEach((collaborator) => { %>
+      < if(indexOf('userId') > -1) { %>
         
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
         
