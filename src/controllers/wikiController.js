@@ -55,7 +55,7 @@ module.exports = {
       if(err) { console.log(users);
           res.redirect(404, "/");
       } else { 
-        wikiQueries.getWiki(req.params.id, (err, wiki) => {
+        wikiQueries.getWiki(req.params.id, (err, wiki) => { 
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {

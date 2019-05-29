@@ -15,7 +15,10 @@ module.exports = {
    deleteCollaborator(req, callback) {
       return Collaborator.findByPk(req.params.id)
       .then((collaborator) => {
-         collaborator.destroy();
+         return collaborator.destroy();
+      })
+      .then(() => {
+         callback();
       })
       .catch((err) => {
          callback(err);

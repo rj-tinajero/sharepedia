@@ -37,11 +37,13 @@ module.exports = {
    //    })
    // },
    destroy(req, res, next) {
-         collabQueries.deleteCollaborator(req, (err, collaborator) => {
+      console.log("BEFORE PROMISE", req.headers);
+         collabQueries.deleteCollaborator(req, (err) => {
             if(err) {
-               console.log(err);
+               
                res.redirect(err, req.headers.referer);
-            } else {
+            } else { 
+               console.log(req.headers);
             res.redirect(req.headers.referer);
          }
       });
@@ -56,20 +58,20 @@ module.exports = {
    //          res.redirect(`/wikis/${req.params.id}/edit`)
    //        });
    
-   create(req, res, next){ console.log(req.wiki, "nananananana");
-      User.findOne({where: {id: req.user.id}})
-          .then(user => { 
+   create(req, res, next){ 
+      User.findOne({where: {id: req.body.user}})
+          .then(user => {
              if (user) { 
                 Wiki.findOne({where: {id: req.params.id}})
                 .then(wiki => {
                   let collaborator = Collaborator.build({
-                     userId: req.user.id,
-                     wikiId: req.params.id
-                  });
-                  collaborator.save();
+                     userId: req.body.user,
+                     wikiId: req.body.wiki
+                  })
+                   collaborator.save();
 
-                  req.flash("notice", "Collaborator has been successfully added!")
-                  res.redirect(`/wikis/${req.params.id}`);
+                req.flash("notice", "Collaborator has been successfully added!")
+                res.redirect(`/wikis/${req.params.id}`);
                 });
                
              }
