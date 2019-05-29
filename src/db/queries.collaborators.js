@@ -24,5 +24,14 @@ module.exports = {
          callback(err);
       })
    }
+   // getAllCollab(callback) {
+   //    return Collaborator.findAll()
+   //    .then((collaborators) => {
+   //       callback(null, collaborators);
+   //    })
+   //    .catch((err) => {
+   //       callback(err);
+   //    })
+   // }
 }
 

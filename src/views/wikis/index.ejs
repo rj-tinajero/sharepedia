@@ -11,12 +11,7 @@
         
       <ul class="list-group">
 
-        <!-- <% wikis.forEach((wiki) => { %>
-          <li class="list-group-item">
-            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-          </li>
-        <% }) %> -->
-        <% if (!locals.currentUser || !locals.currentUser.isPrem()) { %>
+        <% if (!locals.currentUser) { %>
           <% wikis.forEach((wiki) => { %>
             <% if(wiki.private === null || wiki.private === false) { %>
             <li class="list-group-item">
@@ -24,13 +19,24 @@
             </li>
             <% } %> 
           <% }) %> 
-        <% } else if (locals.currentUser.isPrem() || locals.currentUser.isCollab(currentUser.id)) { %>
+        <% } else if (locals.currentUser.isPrem()) { %>
           <% wikis.forEach((wiki) => { %> 
             <li class="list-group-item">
               <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
             </li>
           <% }) %>
-        <% } %>  
+        <% } else { %>  
+          <% wikis.forEach((wiki) => { %>
+           <% wiki.collaborators.forEach((collaborator) => { %>
+              <% if(wiki.collaborator.userId === locals.currentUser.id) { %>
+                <li class="list-group-item">
+                  <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                </li>
+             <% } %>
+          <% }) %>
+         
+          <% }) %>
+        <% } %>
 
 
       </ul>
