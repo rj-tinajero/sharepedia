@@ -26,9 +26,9 @@
             </li>
           <% }) %>
         <% } else { %>  
-          <% wikis.forEach((wiki) => { %>
-           <% wiki.collaborators.forEach((collaborator) => { %>
-              <% if(wiki.collaborator.userId === locals.currentUser.id) { %>
+          <% wikis.forEach((wiki) => { %> 
+           <% wiki.collaborators.forEach((collaborator) => {  %>
+              <% if(collaborator.userId === locals.currentUser.id) { %>
                 <li class="list-group-item">
                   <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
                 </li>

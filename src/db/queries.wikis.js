@@ -4,7 +4,14 @@ const Collaborator = require("./models").Collaborator;
 
 module.exports = {
     getAllWikis(callback) {
-        return Wiki.findAll()
+        return Wiki.findAll({
+            include: [
+                {
+                    model: Collaborator,
+                    as: "collaborators"
+                }
+            ]
+        })
         .then((wikis) => {
             callback(null, wikis);
         })

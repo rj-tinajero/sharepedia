@@ -8,7 +8,7 @@ module.exports = {
             if(err) {
                 console.log(err);
                 res.redirect(500, "static/index");
-            } else {
+            } else { 
                 res.render("wikis/index", {wikis});
             }
         })
@@ -26,7 +26,7 @@ module.exports = {
         wikiQueries.addWiki(newWiki, (err, wiki) => {
             if(err) { 
                 res.redirect(500, "/wikis/new");
-            } else {
+            } else { 
                 res.redirect(303, `/wikis/${wiki.id}`);
             }
         });

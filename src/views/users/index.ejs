@@ -7,7 +7,7 @@
        <%= user.email %>
      </small>
      
-     <!-- <% const collab = wiki.getCollaboratorsFor(user.id) %> -->
+     
      <% if(wiki.collaborators.length === 0) { %> 
       <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/create" method="post">
         <input type="hidden" value="<%= user.id %>" name="user">
@@ -17,7 +17,6 @@
        <% } else { %>
 
      <% wiki.collaborators.forEach((collaborator) => {  %>
-      <% console.log(">>>", collaborator) %>
       <% if(user.isCollab(user.id)) { %>
         
        <form style="display: initial;" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/destroy" method="post">
