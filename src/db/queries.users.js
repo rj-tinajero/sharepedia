@@ -14,7 +14,7 @@ module.exports = {
         .then((user) => {
             callback(null, user);
         })
-        .catch((err) => {
+        .catch((err) => { console.log(err, "im here in query createuser func.");
             callback(err);
         })
     },

@@ -2,16 +2,14 @@ const userQueries = require("../db/queries.users");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
 const keyPublishable = process.env.STRIPE_PUBLISH_KEY;
-console.log("keyPublishable", keyPublishable);
 const keySecret = process.env.STRIPE_SECRET_KEY;
-console.log("keySecret", keySecret);
 const stripe = require("stripe")('sk_test_h2rI1fERunxVIz32Gn6r7KIr00M5ITVe9M');
 
 module.exports = {
     signup(req, res, next) {
         res.render("users/signup");
     },
-    create(req, res, next){ 
+    create(req, res, next){ console.log("IM HERE BEFORE USER CREATED");
              let newUser = {
                email: req.body.email,
                password: req.body.password,
@@ -19,6 +17,7 @@ module.exports = {
              };
              userQueries.createUser(newUser, (err, user) => {
                if(err){
+                 console.log(err, "IM HERE IN IF STATEMENT FOR USERQUIRES");
                  req.flash("error", err);
                  res.redirect("/users/signup");
                } else {
