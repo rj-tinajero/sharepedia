@@ -46,7 +46,7 @@ module.exports = {
             callback(null, wiki);
         })
         .catch((err) => {
-            console.log(err);
+            console.log(err, "in query file lallalalalalalalalalala");
             callback(err);
         })
     },

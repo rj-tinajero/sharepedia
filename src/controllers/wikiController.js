@@ -52,11 +52,12 @@ module.exports = {
     },
     edit(req, res, next) {
         userQueries.getAllUsers((err, users) => {
-      if(err) { console.log(users);
+      if(err) { console.log(err, "edit function of wikicontroller");
           res.redirect(404, "/");
       } else { 
         wikiQueries.getWiki(req.params.id, (err, wiki) => { 
             if(err || wiki == null) {
+                console.log(err, "edit getWiki function of wikicontroller");
                 res.redirect(404, "/");
             } else {
                 res.render("wikis/edit", {wiki, users});

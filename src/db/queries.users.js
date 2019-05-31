@@ -50,6 +50,7 @@ module.exports = {
             callback(null, users);
         })
         .catch((err) => {
+            console.log(err, "getallusers funct MANE");
             callback(err);
         })
     }
