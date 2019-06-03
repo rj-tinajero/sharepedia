@@ -6,38 +6,33 @@
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
-
-      <h1>Wikis</h1>
+      <hr>
+      <hr>
+    <h1>Wikis</h1>
         
       <ul class="list-group">
 
-        <% if (!locals.currentUser) { %>
-          <% wikis.forEach((wiki) => { %>
-            <% if(wiki.private === null || wiki.private === false) { %>
+        <% wikis.forEach((wiki) => { %>
+
+          <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %> 
+          <li class="list-group-item">
+            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+          </li>
+       
+          <% } else if(wiki.private !== true) { %>
             <li class="list-group-item">
               <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
             </li>
-            <% } %> 
-          <% }) %> 
-        <% } else if (locals.currentUser.isPrem()) { %>
-          <% wikis.forEach((wiki) => { %> 
-            <li class="list-group-item">
-              <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-            </li>
-          <% }) %>
-        <% } else { %>  
-          <% wikis.forEach((wiki) => { %> 
-           <% wiki.collaborators.forEach((collaborator) => {  %>
-              <% if(collaborator.userId === locals.currentUser.id) { %>
+          <% } else { %> 
+            <% wiki.collaborators.forEach((collaborator) => { %>
+              <% if(locals.currentUser && collaborator.userId === locals.currentUser.id) { %>
                 <li class="list-group-item">
                   <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
                 </li>
              <% } %>
           <% }) %>
-         
-          <% }) %>
-        <% } %>
-
+          <% } %>
+        <% }) %> 
 
       </ul>
       <a href="/wikis/new" class="btn btn-success">New Wiki</a>

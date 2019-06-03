@@ -37,7 +37,11 @@ module.exports = {
                 console.log(err);
                 res.redirect(404, "/");
             } else {
-                res.render("wikis/show", {wiki, markdown});
+                if(!wiki.private || wiki.userId === req.user.id || wiki.collaborators.find(c => c.userId === req.user.id)) {
+                    res.render("wikis/show", {wiki, markdown});
+                } else {
+                    res.redirect(401, "/");
+                }
             }
         });
     },
@@ -60,7 +64,11 @@ module.exports = {
                 console.log(err, "edit getWiki function of wikicontroller");
                 res.redirect(404, "/");
             } else {
+                if(!wiki.private || wiki.userId === req.user.id || wiki.collaborators.find(c => c.userId === req.user.id)) {
                 res.render("wikis/edit", {wiki, users});
+                } else {
+                    res.redirect(401, "/");
+                }
             }
         });
       }

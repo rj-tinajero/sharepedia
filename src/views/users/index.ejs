@@ -1,5 +1,6 @@
 <% if(users) { %>
    <% users.forEach((user) => { %>
+    <% if(user.id !== locals.currentUser.id) { %> 
    <div style="width: 50%">
      <hr>
      
@@ -35,6 +36,6 @@
      <% })} %>
      <hr>
    </div>
-    
+    <% } %>
       <% }) %>
  <% } %>

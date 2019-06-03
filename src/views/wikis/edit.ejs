@@ -29,10 +29,11 @@
         <div id="preview"> </div>
         <script src="lib/markdown.js"></script>
 
-        <h5>
-          Add collaborators to your private wiki!
-        </h5>
+       
         <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
+          <h5>
+            Add collaborators to your private wiki!
+          </h5>
           <%- include('../users/index', {wiki: wiki}) %>
         <% } %>  
 

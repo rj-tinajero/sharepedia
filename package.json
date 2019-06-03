@@ -4,6 +4,7 @@
   "description": "A Wikipedia-like app for users to share information with one another and even develop collaborative projects.",
   "main": "src/server.js",
   "scripts": {
+    "app": "source stripe.env && nodemon sharepedia",
     "test": "export NODE_ENV=test && jasmine",
     "start": "node src/server.js"
   },
