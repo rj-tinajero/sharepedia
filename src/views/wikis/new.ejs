@@ -5,11 +5,9 @@
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
-    <hr>
-    <hr>
-    <hr>
+    
     <main class="container">
-
+      <hr>
       <h1>New Wiki</h1>
 
       <form action="/wikis/create" method="post">
@@ -21,7 +19,7 @@
           <label for="body">Body</label>
           <textarea rows="10" class="form-control" name="body" placeholder="Enter Body"></textarea>
         </div>
-        <% if(locals.currentUser.isPrem()) { %>
+        <% if(locals.currentUser && locals.currentUser.isPrem()) { %>
           <div>
             <label for="private">Make Wiki Private</label>
            <input id="checked" type="checkbox" name="private">

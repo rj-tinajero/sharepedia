@@ -11,6 +11,7 @@ module.exports = {
     },
     create(req, res, next){ console.log("IM HERE BEFORE USER CREATED");
              let newUser = {
+               name: req.body.name,
                email: req.body.email,
                password: req.body.password,
                passwordConfirmation: req.body.passwordConfirmation

@@ -7,7 +7,6 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
       <hr>
-      <hr>
     <h1>Wikis</h1>
         
       <ul class="list-group">
@@ -35,7 +34,10 @@
         <% }) %> 
 
       </ul>
-      <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+      <% if(locals.currentUser) { %>
+        <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+      <% } %>
+
     </main>
   </body>
 </html>

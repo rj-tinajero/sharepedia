@@ -8,11 +8,8 @@
 
     <main class="container">
         <hr>
-        <hr>
-        <hr>
         
       <h1>Edit Wiki</h1>
-
 
       <form action="/wikis/<%= wiki.id %>/update" method="post">
         <div class="form-group">
@@ -23,13 +20,10 @@
         <div class="form-group">
           <label for="body">Body</label>
 
-          <textarea rows="10" class="form-control" name="body" placeholder="Edit Body"><%= wiki.body %></textarea> 
+          <textarea id="pad" rows="10" class="form-control" name="body" placeholder="Edit Body"><%= wiki.body %></textarea> 
          
         </div>
-        <div id="preview"> </div>
-        <script src="lib/markdown.js"></script>
 
-       
         <% if(locals.currentUser.isPrem() && wiki.private === true) { %>
           <h5>
             Add collaborators to your private wiki!
@@ -45,12 +39,30 @@
         <% } %>  
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
-      
-      
 
+      <hr>
+      <h3>Preview Markdown Body</h3>
+      <div id="markdown"></div>
+      
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
+    <script>
+      window.onload = function() {
+        const converter = new showdown.Converter();
+        const pad = document.getElementById('pad');
+        const markdownArea = document.getElementById('markdown');   
 
+        const convertTextAreaToMarkdown = function(){
+          const markdownText = pad.value;
+          const html = converter.makeHtml(markdownText);
+          markdownArea.innerHTML = html;
+        };
+
+        pad.addEventListener('input', convertTextAreaToMarkdown);
+
+        convertTextAreaToMarkdown();
+      };
+    </script>
   </body>
 </html>

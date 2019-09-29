@@ -9,6 +9,7 @@ const passportConfig = require("./passport-config");
 const logger = require('morgan');
 const passport = require('passport');
 
+
 module.exports = {
   init(app, express){
       app.set("views", viewsFolder);
@@ -22,7 +23,7 @@ module.exports = {
             saveUninitialized: false
         }));
         app.use(passport.initialize());
-app.use(passport.session());
+      app.use(passport.session());
         app.use(flash());
         passportConfig.init(app);
         app.use((req, res, next) => {

@@ -6,7 +6,7 @@
   "scripts": {
     "app": "source stripe.env && nodemon sharepedia",
     "test": "export NODE_ENV=test && jasmine",
-    "start": "node src/server.js"
+    "start": "nodemon src/server.js"
   },
   "author": "Richard Tinajero",
   "license": "ISC",
@@ -28,12 +28,15 @@
     "express-validator": "^5.3.1",
     "markdown": "^0.5.0",
     "morgan": "^1.9.1",
+    "nodemon": "^1.19.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.10.0",
     "pg-hstore": "^2.3.2",
+    "redis": "^2.8.0",
     "sequelize": "^5.7.4",
     "sequelize-cli": "^5.4.0",
+    "share": "^0.6.3",
     "stripe": "^6.31.1"
   }
 }
