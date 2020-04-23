@@ -9,24 +9,27 @@
       <hr>
     <h1>Wikis</h1>
         
-      <ul class="list-group">
+      <ul class="list-group list-group-flush">
 
         <% wikis.forEach((wiki) => { %>
 
           <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %> 
           <li class="list-group-item">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+            <span class="align-right">Posted on: <%= wiki.updatedAt %></span>
           </li>
        
           <% } else if(wiki.private !== true) { %>
             <li class="list-group-item">
               <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              <span class="align-right">Posted on: <%= wiki.updatedAt %></span>
             </li>
           <% } else { %> 
             <% wiki.collaborators.forEach((collaborator) => { %>
               <% if(locals.currentUser && collaborator.userId === locals.currentUser.id) { %>
                 <li class="list-group-item">
                   <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                  <span class="align-right">Posted on: <%= wiki.updatedAt %></span>
                 </li>
              <% } %>
           <% }) %>

@@ -5,3 +5,7 @@ body {
 #markdown {
    overflow: auto;
 }
+
+.vertical-center {
+   align-items: center
+}

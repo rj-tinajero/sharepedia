@@ -7,24 +7,32 @@
     <body>
         <% include ../static/partials/navbar.ejs %>
         <main class="container">
-            <hr>
-            <h2>Upgrade to Premium Plan</h2>
-            <div id="shop">
-                    <form action='/users/charge' method="POST">
-                        <script
-                          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= keyPublishable %>"
-                          data-amount="1500"
-                          data-name="Sharepedia"
-                          data-description="premium account"
-                          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-                          data-locale="auto"
-                          data-zip-code="true">
-                        </script>
-                </form>
-                    
-                  
+            <div class="vertical-center">
+                    <hr>
+                    <h2>Upgrade to Premium Plan</h2>
+                    <p>Want to be able to add a team of collaborators to your wiki entries?</p>
+                    <p>Want to make your wikis viewable for your development team only?</p>
+                    <p>Well, you've got to upgrade your account!!! :D</p>
+                    <p>Upgrade your account below by paying a one time fee through our secure StripeAPI</p>
+        
+                    <div id="shop">
+                            <form action='/users/charge' method="POST">
+                                <script
+                                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                  data-key="<%= keyPublishable %>"
+                                  data-amount="1500"
+                                  data-name="Sharepedia"
+                                  data-description="premium account"
+                                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                  data-locale="auto"
+                                  data-zip-code="true">
+                                </script>
+                        </form>
+                            
+                          
+                    </div>
             </div>
+            
         </main>
 
 
