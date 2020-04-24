@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
           <label for="body">Body</label>
-          <textarea rows="10" class="form-control" name="body" placeholder="Enter Body"></textarea>
+          <textarea id="pad" rows="10" class="form-control" name="body" placeholder="Enter Body"></textarea>
         </div>
         <% if(locals.currentUser && locals.currentUser.isPrem()) { %>
           <div>
@@ -27,10 +27,31 @@
         <% } %> 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
+      <hr>
+      <h3>Preview Markdown Body</h3>
+      <div id="markdown" class="bg-light"></div>
       
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>
+    <script>
+      window.onload = function() {
+        const converter = new showdown.Converter();
+        const pad = document.getElementById('pad');
+        const markdownArea = document.getElementById('markdown');   
+
+        const convertTextAreaToMarkdown = function(){
+          const markdownText = pad.value;
+          const html = converter.makeHtml(markdownText);
+          markdownArea.innerHTML = html;
+        };
+
+        pad.addEventListener('input', convertTextAreaToMarkdown);
+
+        convertTextAreaToMarkdown();
+      };
+    </script>
     <% include ../static/partials/footer.ejs %>
   </body>
 </html>

@@ -14,7 +14,7 @@ module.exports = {
         })
     },
     new(req, res, next) {
-        res.render("wikis/new");
+        res.render("wikis/new", {markdown});
     },
     create(req, res, next) {
         let newWiki = {
