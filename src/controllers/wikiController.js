@@ -32,7 +32,7 @@ module.exports = {
         });
     },
     show(req, res, next) {
-        wikiQueries.getWiki(req.params.id, (err, wiki) => { console.log(err);
+        wikiQueries.getWiki(req.params.id, (err, wiki) => { 
             if(err || wiki == null) {
                 console.log(err);
                 res.redirect(404, "/");
@@ -56,12 +56,11 @@ module.exports = {
     },
     edit(req, res, next) {
         userQueries.getAllUsers((err, users) => {
-      if(err) { console.log(err, "edit function of wikicontroller");
+      if(err) { 
           res.redirect(404, "/");
       } else { 
         wikiQueries.getWiki(req.params.id, (err, wiki) => { 
             if(err || wiki == null) {
-                console.log(err, "edit getWiki function of wikicontroller");
                 res.redirect(404, "/");
             } else {
                 if(!wiki.private || wiki.userId === req.user.id || wiki.collaborators.find(c => c.userId === req.user.id)) {

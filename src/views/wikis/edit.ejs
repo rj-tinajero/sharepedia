@@ -11,6 +11,13 @@
         
       <h1>Edit Wiki</h1>
 
+      <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %>
+        <h5>
+          Add collaborators to your private wiki!
+        </h5>
+        <%- include('../users/index', {wiki: wiki}) %>
+      <% } %>  
+
       <form action="/wikis/<%= wiki.id %>/update" method="post">
         <div class="form-group">
           <label for="title">Wiki title</label>
@@ -24,12 +31,7 @@
          
         </div>
 
-        <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %>
-          <h5>
-            Add collaborators to your private wiki!
-          </h5>
-          <%- include('../users/index', {wiki: wiki}) %>
-        <% } %>  
+    
 
         <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === null) { %>
           <div>
@@ -39,6 +41,8 @@
         <% } %>  
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
+
+      
 
       <hr>
       <h3>Preview Markdown Body</h3>

@@ -71,7 +71,7 @@ module.exports = {
                    collaborator.save();
 
                 req.flash("notice", "Collaborator has been successfully added!")
-                res.redirect(`/wikis/${req.params.id}`);
+                res.redirect(req.headers.referer);
                 });
                
              }

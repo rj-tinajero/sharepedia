@@ -9,11 +9,14 @@
     <main class="container">
       <hr>
       <h1><%= wiki.title %></h1>
+      <% if(wiki.private == true) { %>
+        <h6>(Private)</h6>
+      <% } %>
 
       <p><%- markdown.toHTML(wiki.body) %></p>
         <hr>
 
-      <% if(locals.currentUser && locals.currentUser.id == wiki.userId) { %>
+      <% if(locals.currentUser && locals.currentUser.id === wiki.userId || wiki.collaborators.find(c => c.userId === locals.currentUser.id)) { %>
         <div>
           <form style="display:initial" action="/users" method="get">
             <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>

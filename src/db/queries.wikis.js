@@ -29,6 +29,17 @@ module.exports = {
             callback(err); 
         })
     },
+    // makePub(id, callback) {
+    //     Wiki.findByPk(id)
+    //     .then((wiki) => {
+    //         wiki.update({
+    //             private: false
+    //         })
+    //     })
+    //     .catch((err) => {
+    //         callback(err);
+    //     })
+    // },
     getWiki(id, callback) {
         return Wiki.findByPk(id, {
             include: [
@@ -46,7 +57,6 @@ module.exports = {
             callback(null, wiki);
         })
         .catch((err) => {
-            console.log(err, "in query file lallalalalalalalalalala");
             callback(err);
         })
     },

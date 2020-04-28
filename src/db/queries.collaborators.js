@@ -9,6 +9,7 @@ module.exports = {
          callback(null, collaborator);
       })
       .catch((err) => {
+         console.log(err, "Null huh?");
          callback(err);
       });
    },
