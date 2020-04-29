@@ -11,9 +11,9 @@
         
       <h1>Edit Wiki</h1>
 
-      <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %>
+      <% if(locals.currentUser && locals.currentUser.isPrem()) { %>
         <h5>
-          Add collaborators to your private wiki!
+          Add collaborators to your wiki! Public or Private!
         </h5>
         <%- include('../users/index', {wiki: wiki}) %>
       <% } %>  
@@ -33,10 +33,16 @@
 
     
 
-        <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === null) { %>
+        <% if(locals.currentUser && locals.currentUser.isPrem() && !wiki.private) { %>
           <div>
               <label for="private">Make Wiki Private</label>
               <input type="checkbox" name="private">
+          </div>
+        <% } %>  
+        <% if(locals.currentUser && locals.currentUser.isPrem() && wiki.private === true) { %>
+          <div>
+              <label for="private">Make Wiki Public (All users will be able to view)</label>
+              <input type="checkbox" name="private" value="off">
           </div>
         <% } %>  
         <button type="submit" class="btn btn-primary">Update</button>

@@ -63,7 +63,7 @@ module.exports = {
             if(err || wiki == null) {
                 res.redirect(404, "/");
             } else {
-                if(!wiki.private || wiki.userId === req.user.id || wiki.collaborators.find(c => c.userId === req.user.id)) {
+                if(req.user && wiki.userId === req.user.id || wiki.collaborators.find(c => c.userId === req.user.id)) {
                 res.render("wikis/edit", {wiki, users, markdown});
                 } else {
                     res.redirect(401, "/");
