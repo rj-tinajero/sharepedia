@@ -22,7 +22,7 @@
     "bootstrap-confirmation2": "^4.1.0",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-flash": "0.0.2",
     "express-session": "^1.16.1",
     "express-validator": "^5.3.1",
